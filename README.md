@@ -4,8 +4,10 @@
 
 
 ## Yangjun Liu's Modifications for
-0) install via $ pip install -e .
+0) Install via $ pip install -e .
 1) tools/dataset_generator_ur5.py
+2) Add **save_demo_fusion_peract()** for FLAGS.save_mode ='fusion_peract' in dataset_generator.py
+3) **Replace** the default value of **mask** of class CameraConfig, and **self.overhead_camera** of class ObservationConfig in rlbench/observation_config.py
 
 ## Mohit Shridhar's Modifications for Perceiver-Actor Paper
  This is my fork of RLBench. Modifications include:
