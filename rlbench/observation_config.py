@@ -64,7 +64,9 @@ class ObservationConfig(object):
 #        self.overhead_camera = (
 #            CameraConfig() if overhead_camera is None
 #            else overhead_camera)  # original
-        self.overhead_camera = overhead_camera # Modified
+        self.overhead_camera = (
+            CameraConfig(rgb=False, depth=False, point_cloud=False, mask=False) if overhead_camera is None
+            else overhead_camera)  # Modified
         self.wrist_camera = (
             CameraConfig() if wrist_camera is None
             else wrist_camera)
@@ -94,7 +96,9 @@ class ObservationConfig(object):
     def set_all_high_dim(self, value: bool):
         self.left_shoulder_camera.set_all(value)
         self.right_shoulder_camera.set_all(value)
-        if self.overhead_camera !=None:   # Added for fusion peract
+        if self.overhead_camera.rgb == False:   # Added for fusion peract
+            self.overhead_camera.set_all(False)
+        else:
             self.overhead_camera.set_all(value)
         self.wrist_camera.set_all(value)
         self.front_camera.set_all(value)
