@@ -102,6 +102,13 @@ sudo nvidia-xconfig -a --use-display-device=None --virtual=1280x1024
 wget https://sourceforge.net/projects/virtualgl/files/2.5.2/virtualgl_2.5.2_amd64.deb/download -O virtualgl_2.5.2_amd64.deb
 sudo dpkg -i virtualgl*.deb
 rm virtualgl*.deb
+
+# As for server of HPCC users who don't have sudo permissions, u may try to install virtualgl into user home directory as followings:
+wget https://sourceforge.net/projects/virtualgl/files/2.5.2/VirtualGL-2.5.2.x86_64.rpm/download -O VirtualGL-2.5.2.x86_64.rpm
+#Extract the package contents using the rpm2cpio and cpio utilities
+rpm2cpio VirtualGL-2.5.2.x86_64.rpm | cpio -idmv
+export PATH=$HOME/opt/VirtualGL/bin:$PATH
+# Then u can run command like $ vglrun
 ```
 You will now need to reboot, and then start the X server:
 ```bash
