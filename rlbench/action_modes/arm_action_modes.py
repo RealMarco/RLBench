@@ -230,23 +230,36 @@ class EndEffectorPoseViaPlanning(ArmActionMode):
                     algorithm=Algos.RRTConnect
                 )
             except ConfigurationPathError as e:
-                if ignore_collisions:
-                    raise InvalidActionError(
-                        'A path could not be found. Most likely due to the target '
-                        'being inaccessible or a collison was detected.') from e
-                else:
-                    # try once more with collision checking disabled
-                    path = scene.robot.arm.get_path(
-                        action[:3],
-                        quaternion=action[3:],
-                        ignore_collisions=True,
-                        relative_to=relative_to,
-                        trials=100,
-                        max_configs=10,
-                        max_time_ms=10,
-                        trials_per_goal=5,
-                        algorithm=Algos.RRTConnect
-                    )
+#                if ignore_collisions:
+#                    raise InvalidActionError(
+#                        'A path could not be found. Most likely due to the target '
+#                        'being inaccessible or a collison was detected.') from e
+#                else:
+#                    # try once more with collision checking disabled
+#                    path = scene.robot.arm.get_path(
+#                        action[:3],
+#                        quaternion=action[3:],
+#                        ignore_collisions=True,
+#                        relative_to=relative_to,
+#                        trials=100,
+#                        max_configs=10,
+#                        max_time_ms=10,
+#                        trials_per_goal=5,
+#                        algorithm=Algos.RRTConnect
+#                    )
+                
+                # try once more with SBL + collision checking disabled  # Modfied, Try once more with collision checking disabled
+                path = scene.robot.arm.get_path(
+                    action[:3],
+                    quaternion=action[3:],
+                    ignore_collisions=True,
+                    relative_to=relative_to,
+                    trials=100,
+                    max_configs=10,
+                    max_time_ms=10,
+                    trials_per_goal=5,
+                    algorithm=Algos.SBL # RRTConnect; MOdified, try another algorithm
+                )
         except ConfigurationPathError as e:
             raise InvalidActionError(
                 'A path could not be found. Most likely due to the target '

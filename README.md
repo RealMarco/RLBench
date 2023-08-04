@@ -9,6 +9,8 @@
 2) Add **save_demo_fusion_peract()** for FLAGS.save_mode ='fusion_peract' in dataset_generator.py
 3) **Replace** the default value of **mask** (to False) of class CameraConfig, and **self.overhead_camera** of class ObservationConfig in rlbench/observation_config.py
 4) Adde a if-else (*if exists(oh_rgb_f) and exists(oh_depth_f):*) to check the dataset outside **raise RuntimeError('Broken dataset assumption')** at rlbench/utils.py
+5)  modified EndEffectorPoseViaPlanning() in RLBench/rlbench/action_modes/arm_action_modes.py. - try another planning by SBL algrithm without collision checking if the first planning failed
+6) modified Discrete() in rlbench/action_modes/gripper_action_modes.py - scene.robot.gripper.actuate(action, velocity=0.1),  simply change the velocity from 0.2 to 0.1
 
 ## Mohit Shridhar's Modifications for Perceiver-Actor Paper
  This is my fork of RLBench. Modifications include:
@@ -93,7 +95,7 @@ And that's it!
 
 ## Running Headless
 
-You can run RLBench headlessly with VirtualGL. VirtualGL is an open source toolkit that gives any Unix or Linux remote display software the ability to run OpenGL applications **with full 3D hardware acceleration**.
+You can run RLBench headlessly with VirtualGL and GPU. VirtualGL is an open source toolkit that gives any Unix or Linux remote display software the ability to run OpenGL applications **with full 3D hardware acceleration**.
 First insure that you have the nVidia proprietary driver installed. I.e. you should get an output when running `nvidia-smi`. Now run the following commands:
 ```bash
 sudo apt-get install xorg libxcb-randr0-dev libxrender-dev libxkbcommon-dev libxkbcommon-x11-0 libavcodec-dev libavformat-dev libswscale-dev

@@ -39,7 +39,7 @@ class Discrete(GripperActionMode):
     def _actuate(self, scene, action):
         done = False
         while not done:
-            done = scene.robot.gripper.actuate(action, velocity=0.2)
+            done = scene.robot.gripper.actuate(action, velocity=0.1)  # MOdified, 0.2
             scene.pyrep.step()
             scene.task.step()
 
