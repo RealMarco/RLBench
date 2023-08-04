@@ -258,7 +258,7 @@ class EndEffectorPoseViaPlanning(ArmActionMode):
                     max_configs=10,
                     max_time_ms=10,
                     trials_per_goal=5,
-                    algorithm=Algos.SBL # RRTConnect; MOdified, try another algorithm
+                    algorithm=Algos.RRTConnect # RRTConnect; MOdified, try another algorithm
                 )
         except ConfigurationPathError as e:
             raise InvalidActionError(
