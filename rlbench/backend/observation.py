@@ -75,12 +75,14 @@ class Observation(object):
         :return: 1D array of observations.
         """
         low_dim_data = [] if self.gripper_open is None else [[self.gripper_open]]
-        for data in [self.joint_velocities, self.joint_positions,
-                     self.joint_forces,
-                     self.gripper_pose, self.gripper_joint_positions,
-                     self.gripper_touch_forces, self.task_low_dim_state]:
+        for data in [self.gripper_joint_positions,self.gripper_pose,self.gripper_touch_forces, # Modified order
+					 self.joint_forces, #None
+					 self.joint_positions,self.joint_velocities, 
+					  self.task_low_dim_state]: # None, None
             if data is not None:
                 low_dim_data.append(data)
+				
+#        print(self.gripper_open, self.gripper_joint_positions, self.gripper_pose, self.gripper_touch_forces,self.joint_forces,self.joint_positions, self.joint_velocities, self.task_low_dim_state)
         return np.concatenate(low_dim_data) if len(low_dim_data) > 0 else np.array([])
     
     def get_gripper_open_joint_positions(self) -> np.ndarray:

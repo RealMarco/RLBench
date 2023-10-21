@@ -116,7 +116,7 @@ def get_stored_demos(amount: int, image_paths: bool, dataset_root: str,
 
         num_steps = len(obs)
         
-        if exists(oh_rgb_f) and exists(oh_depth_f):  # Modified
+        if exists(oh_rgb_f) and exists(l_sh_rgb_f) and  exists(front_depth_f) and exists(wrist_depth_f):  # Modified
             if not (num_steps == len(listdir(l_sh_rgb_f)) == len(
                     listdir(l_sh_depth_f)) == len(listdir(r_sh_rgb_f)) == len(
                     listdir(r_sh_depth_f)) == len(listdir(oh_rgb_f)) == len(
@@ -124,13 +124,28 @@ def get_stored_demos(amount: int, image_paths: bool, dataset_root: str,
                     listdir(wrist_depth_f)) == len(listdir(front_rgb_f)) == len(
                     listdir(front_depth_f))):
                 raise RuntimeError('Broken dataset assumption') # original
-        else:
+        elif exists(l_sh_rgb_f) and exists(r_sh_depth_f):
             if not (num_steps == len(listdir(l_sh_rgb_f)) == len(
                     listdir(l_sh_depth_f)) == len(listdir(r_sh_rgb_f)) == len(
                     listdir(r_sh_depth_f)) == len(listdir(wrist_rgb_f)) == len(
                     listdir(wrist_depth_f)) == len(listdir(front_rgb_f)) == len(
                     listdir(front_depth_f))):
                 raise RuntimeError('Broken dataset assumption')
+        elif exists(oh_rgb_f) and exists(front_depth_f): # Added
+            if not (num_steps == len(listdir(oh_rgb_f)) == len(
+                    listdir(oh_depth_f)) == len(listdir(front_rgb_f)) == len(
+                    listdir(front_depth_f))):
+                raise RuntimeError('Broken dataset assumption')
+        elif exists(wrist_rgb_f) and exists(front_depth_f): # Added
+            if not (num_steps == len(listdir(wrist_rgb_f)) == len(
+                    listdir(wrist_depth_f)) == len(listdir(front_rgb_f)) == len(
+                    listdir(front_depth_f))):
+                raise RuntimeError('Broken dataset assumption')
+        else: # Added
+            if not (num_steps == len(listdir(front_rgb_f)) == len(
+                    listdir(front_depth_f))):
+                raise RuntimeError('Broken dataset assumption')
+            
 
         for i in range(num_steps):
             # descriptions

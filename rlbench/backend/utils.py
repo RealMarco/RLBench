@@ -63,7 +63,7 @@ DEFAULT_RGB_SCALE_FACTOR = 256000.0
 
 
 def float_array_to_rgb_image(float_array,
-                             scale_factor=DEFAULT_RGB_SCALE_FACTOR,
+                             scale_factor=DEFAULT_RGB_SCALE_FACTOR,  # 2**24 - 1 when implement
                              drop_blue=False):
   """Convert a floating point array of values to an RGB image.
 
